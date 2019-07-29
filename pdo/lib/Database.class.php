@@ -78,4 +78,20 @@ class UserInput extends Database
 		}
 		
 	}
+	public function checkEmailVal($index , $name , $email){
+	//$this->errorMsg[$index] = '';
+	try{
+		$query = "SELECT * FROM user_details WHERE email = '$email' LIMIT 0,1";
+		$stmt = $this->conn->query($query);
+		$row = $stmt->fetch();
+		if ($row === false){
+			return false;
+		}
+
+		return $row;
+		}
+	catch(PDOException $ex){
+		throw new Exception("Error Processing Request ".$ex->getMessage(), 1); 
+		}
+	}
 }

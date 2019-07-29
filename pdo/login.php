@@ -5,6 +5,7 @@ if(isset($_POST) && !empty($_POST)){
 	$Validator->checkNotEmpty('email', 'Email', $PostRequest->email);
 	$Validator->checkEmail('email', $PostRequest->email, $PostRequest->email);
 	$Validator->checkNotEmpty('password', 'Password', $PostRequest->password);
+	$row = $Validator->checkEmail('email', 'email', $PostRequest->email);
 	$row = $Validator->checkEmailAndPassword('email', 'email', $PostRequest->email, $PostRequest->password);
 		
 	if( $Validator->getIsValid() ){

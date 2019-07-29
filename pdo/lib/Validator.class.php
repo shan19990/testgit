@@ -38,6 +38,16 @@ class Validator
 		}
 	}
 
+	public function checkEmailVal($index , $name , $email){
+	$row = $this->user->checkEmail($index , $name , trim($email));
+	if ($row === false){
+		$this->errorMsg[$index] = 'Email is not valied';
+		$this->isValid = false;
+	}
+
+	return $row;
+	}
+
 	public function checkEmailAndPassword($index , $name , $email , $password){
 		$row = $this->user->checkEmailAndPassword($index , $name , trim($email) , $password);
 		if ($row === false){

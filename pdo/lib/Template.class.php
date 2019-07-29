@@ -12,7 +12,7 @@ class Template
 	}
 
 
-	public static function formOpen($method = 'GET', $action = ''){
+	public static function formOpen($method = 'POST', $action = ''){
 		return '<form method="'.$method.'" action="'.$action.'">';
 	}
 

@@ -20,15 +20,16 @@ if(isset($_POST) && !empty($_POST)){
 	if( $Validator->getIsValid() ){
 
 		// insert
-		$Database->insert('asd','asd','asd');
+		//$Database->insert('asd','asd','asd');
 
 
 	} else {
 		print_r($Validator->getError());
 	}
 }
-print_r($_POST);
-$con = new UserInput($_POST['first'],$_POST['last'],$_POST['email'],$_POST['password']);
+
+$UserInput = new UserInput();
+$UserInput->insert($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['password']);
 ?>
 <!DOCTYPE html>
 <html>
