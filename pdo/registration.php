@@ -7,7 +7,7 @@ echo $PostRequest->lastname;
 echo $PostRequest->email;
 echo $PostRequest->password;
 */
-
+print_r($_POST);
 if(isset($_POST) && !empty($_POST)){
 	$Validator->checkNotEmpty('firstname', 'First Name', $PostRequest->firstname);
 	$Validator->checkNotEmpty('lastname', 'Last Name', $PostRequest->lastname);
@@ -22,14 +22,16 @@ if(isset($_POST) && !empty($_POST)){
 		// insert
 		//$Database->insert('asd','asd','asd');
 
+		$UserInput = new UserInput();
+		$UserInput->insert($PostRequest->firstname,$PostRequest->lastname,$PostRequest->email,$PostRequest->password);
+
 
 	} else {
 		print_r($Validator->getError());
 	}
 }
 
-$UserInput = new UserInput();
-$UserInput->insert($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['password']);
+
 ?>
 <!DOCTYPE html>
 <html>

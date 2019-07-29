@@ -34,8 +34,9 @@ class UserInput extends Database
 	
 	public function insert($first,$last,$email,$password){
 		try {
-			$query = "INSERT INTO user_details (first_name, last_name, email, password) VALUES('$first', '$last', '$email', '$password')";
-			$this->conn->query($query);
+			$query = "INSERT INTO user_details (first_name, last_name, email, password) VALUES(?,?,?,?)";
+			$stmt = $this->conn->prepare($query);
+			return $stmt->execute([$first, $last, $email, $password]);
 		} 
 		catch (PDOException $e) {
 			echo "Error : " . $e->getMessage() . "<br/>";
@@ -45,19 +46,22 @@ class UserInput extends Database
 	public function checkUnique($index , $name , $param){
 		//$this->errorMsg[$index] = '';
 		try{
-		$query = "SELECT * FROM user_details WHERE email = '$param' LIMIT 0,1";
-		$stmt = $this->conn->query($query);
-		$row=mysqli_fetch_assoc($this->conn);
+			$query = "SELECT * FROM user_details WHERE email = '$param' LIMIT 0,1";
+			$stmt = $this->conn->query($query);
+			$row = $stmt->fetch();
+
+			if ($row === false){
+				return true;
 			}
+
+			return false;
+			
+		}
 		catch(PDOException $ex){
 			throw new Exception("Error Processing Request ".$ex->getMessage(), 1);
 		    
 		}
-		if ($row !== -1){
-			return false;
-		}
-
-		return true;
+		
 	}
 
 	public function checkEmailAndPassword($index , $name , $email , $password){

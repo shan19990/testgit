@@ -31,7 +31,7 @@ class Validator
 	}
 
 	public function checkUnique($index , $name , $param){
-		$row = $this->db->checkUnique($index , $name , $param);
+		$row = $this->user->checkUnique($index , $name , $param);
 		if ($row === false){
 			$this->errorMsg[$index] = 'Error: ' .$name. ' is already registered';
 			$this->isValid = false;
